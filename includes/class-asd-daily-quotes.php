@@ -39,19 +39,12 @@ class ASD_Daily_Quotes {
             $random_quote = $final_quote_list[ array_rand( $final_quote_list ) ];
             $emails = file( AS_DEMO_DIR_PATH . '/mailing_list.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
             foreach ($emails as $email) {
-                // $to_addr = trim($email);
                 $subject = "Quote of the day";
                 $body = "{$random_quote}<br><br>Kind Regards,<br>Imokol Faith Ruth.";
-                // $headers[] = 'From: Imokol Faith Ruth <faithruth27@gmail.com>';
-                $to = $email;
+                $to = trim( $email, '"' );
                 $headers = array('Content-Type: text/html; charset=UTF-8','From: Imokol Faith Ruth <faithruth27@gmail.com>');
 
                 wp_mail( $to, $subject, $body, $headers );
-                // if (wp_mail($to_addr, $subject, $message, $headers)) {
-                //     error_log(print_r('yes', true));
-                // } else {
-                //     error_log(print_r('no', true));
-                // }
                 
             }
         }
